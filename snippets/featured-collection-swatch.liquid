@@ -1,3 +1,43 @@
-<div>
-  test
-</div>
+{% comment %}
+  Renders a list of product colour options in swatch styling
+
+  Accepts:
+  - product: {Object} Product Liquid object
+
+  Usage:
+  {% render 'featured-collection-swatch', product: product %}
+{% endcomment %}
+{% liquid
+  assign colour_variant_exists = false
+  for option in product.options
+    if option == 'Color'
+      assign colour_variant_exists = true
+    endif
+  endfor
+%}
+
+{% unless colour_variant_exists == false %}
+  <div class="flex gap-2 mb-4">
+    {% for variant in product.variants %}
+      {% liquid
+        assign swatch_lower = variant.title | downcase
+        if swatch_lower == 'orange'
+          assign swatch_color_class = 'bg-orange'
+        elsif swatch_lower == 'green'
+          assign swatch_color_class = 'bg-green'
+        elsif swatch_lower == 'blue'
+          assign swatch_color_class = 'bg-blue'
+        elsif swatch_lower == 'pink'
+          assign swatch_color_class = 'bg-pink'
+        elsif swatch_lower == 'yellow'
+          assign swatch_color_class = 'bg-yellow'
+        elsif swatch_lower == 'navy'
+          assign swatch_color_class = 'bg-navy'
+        endif
+      %}
+      <span
+        class="w-5 h-5 block rounded-full {{ swatch_color_class }} hover hover:outline outline-navy outline-offset-2"
+      ></span>
+    {% endfor %}
+  </div>
+{% endunless %}

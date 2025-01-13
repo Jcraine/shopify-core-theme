@@ -36,7 +36,7 @@
         endif
       %}
       <span
-        class="w-5 h-5 block rounded-full {{ swatch_color_class }} hover hover:outline outline-navy outline-offset-2 cursor-pointer"
+        class="{% if forloop.index == 1 %}active-swatch-icon outline {%endif%}w-5 h-5 block rounded-full {{ swatch_color_class }} hover hover:outline outline-navy outline-offset-2 cursor-pointer"
         data-variant-id="{{ variant.id }}"
       ></span>
     {% endfor %}
@@ -60,6 +60,16 @@
 
     let clickedVariantId = e.target.getAttribute('data-variant-id')
     let variant = variantData[clickedVariantId]
+
+    let activeProduct = document.querySelector(`.active-swatch-icon`)
+
+    if(activeProduct){
+      activeProduct.classList.remove('active-swatch-icon')
+      activeProduct.classList.remove('outline')
+    }
+
+    e.target.classList.add('active-swatch-icon')
+    e.target.classList.add('outline')
 
     let productElement = document.querySelector(`[data-product-id="${variant.product_id}"]`)
 

@@ -19,8 +19,29 @@
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
+    },
+    {
+      "key": "brand",
+      "namespace": "custom",
+      "name": "Brand",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
     }
   ],
-  "variant": [],
+  "variant": [
+    {
+      "key": "secondary_image",
+      "namespace": "custom",
+      "name": "Secondary Image",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    }
+  ],
   "shop": []
 }

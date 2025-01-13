@@ -554,6 +554,15 @@ video {
   display: none;
 }
 
+/*
+    Setting base font-size to 16px based on tailwindcss font size. This is
+    to isolate base theme styling from custom component styling
+   */
+
+.tw-wrapper {
+  font-size: 16px;
+}
+
 .container {
   width: 100%;
 }
@@ -606,6 +615,22 @@ video {
 
 .sticky {
   position: sticky;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.left-5 {
+  left: 1.25rem;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.top-5 {
+  top: 1.25rem;
 }
 
 .isolate {
@@ -694,8 +719,26 @@ video {
   white-space: nowrap;
 }
 
+.rounded-3xl {
+  border-radius: 1.5rem;
+}
+
+.rounded-\[10px\] {
+  border-radius: 10px;
+}
+
 .border {
   border-width: 1px;
+}
+
+.border-grey {
+  --tw-border-opacity: 1;
+  border-color: rgb(232 232 232 / var(--tw-border-opacity, 1));
+}
+
+.border-sale-orange {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 0 0 / var(--tw-border-opacity, 1));
 }
 
 .bg-blue {
@@ -728,9 +771,37 @@ video {
   background-color: rgb(252 231 141 / var(--tw-bg-opacity, 1));
 }
 
+.p-5 {
+  padding: 1.25rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-1\.5 {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.font-medium {
+  font-weight: 500;
 }
 
 .uppercase {
@@ -745,9 +816,9 @@ video {
   font-style: italic;
 }
 
-.text-orange {
+.text-sale-orange {
   --tw-text-opacity: 1;
-  color: rgb(255 102 51 / var(--tw-text-opacity, 1));
+  color: rgb(255 0 0 / var(--tw-text-opacity, 1));
 }
 
 .underline {

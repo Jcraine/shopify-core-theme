@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /*
+    Setting base font-size to 16px based on tailwindcss font size. This is
+    to isolate base theme styling from custom component styling
+   */
+  .tw-wrapper {
+    font-size: 16px;
+  }
+}

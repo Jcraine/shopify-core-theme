@@ -36,8 +36,46 @@
         endif
       %}
       <span
-        class="w-5 h-5 block rounded-full {{ swatch_color_class }} hover hover:outline outline-navy outline-offset-2"
+        class="w-5 h-5 block rounded-full {{ swatch_color_class }} hover hover:outline outline-navy outline-offset-2 cursor-pointer"
+        data-variant-id="{{ variant.id }}"
       ></span>
     {% endfor %}
   </div>
 {% endunless %}
+
+<script>
+  {% for variant in product.variants %}
+      variantData[{{ variant.id }}] = {
+        secondary_image: "{{ variant.metafields.custom.secondary_image | image_url: width: 533 }}",
+        featured_media: "{{ variant.featured_media | image_url: width: 533 }}",
+        price: "{{ variant.price | money_with_currency }}",
+        compare_at_price: "{{ variant.compare_at_price | money_with_currency }}",
+        product_id: {{ variant.product.id }}
+      }
+  {% endfor %}
+
+  function onVariantClick(e) {
+    e.stopPropagation()
+    e.preventDefault()
+
+    let clickedVariantId = e.target.getAttribute('data-variant-id')
+    let variant = variantData[clickedVariantId]
+
+    let productElement = document.querySelector(`[data-product-id="${variant.product_id}"]`)
+
+    productElement.querySelector('.featured-image').src = variant.featured_media
+    productElement.querySelector('.secondary-image').src = variant.secondary_image
+
+    if(variant.compare_at_price) {
+      productElement.querySelectorAll('.price-item--regular').forEach((element) => {element.innerHTML = variant.compare_at_price})
+      productElement.querySelectorAll('.price-item--sale').forEach((element) => {element.innerHTML = variant.price})
+    } else {
+      productElement.querySelectorAll('.price-item--regular').forEach((element) => {element.innerHTML = variant.price})
+    }
+  }
+
+  for (variantId in variantData) {
+    const element = document.querySelector(`[data-variant-id="${variantId}"]`)
+    element.addEventListener('click', onVariantClick)
+  }
+</script>

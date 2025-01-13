@@ -58,6 +58,12 @@
   endif
 -%}
 
+<script>
+  // initialise variant data for collection swatch functionality.
+  // TODO: Refactor this so that swatch component does not rely on this variable declaration outside of the swatch component
+  let variantData = {};
+</script>
+
 <div
   class="color-{{ section.settings.color_scheme }} isolate gradient"
 >

@@ -31,12 +31,15 @@
 {%- endunless -%}
 
 {%- if card_product and card_product != empty -%}
-  <a
-    href="{{ card_product.url }}"
-    aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+  <div
+    class="group"
+    data-product-id="{{ card_product.id }}"
   >
-    <div class="group">
-      <div class="relative rounded-[10px] border border-grey mb-4">
+    <a
+      href="{{ card_product.url }}"
+      aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+    >
+      <div class="relative rounded-[10px] overflow-hidden border border-grey mb-4">
         {%- if card_product.available == false -%}
           <span
             class="absolute top-5 left-5 rounded-3xl border border-sale-orange text-sale-orange py-1.5 px-3 font-medium text-base z-20"
@@ -53,19 +56,10 @@
 
         <div class="!grid grid-cols-1 grid-rows-1 items-center">
           <img
-            srcset="
-              {%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
-              {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
-              {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
-              {%- if card_product.featured_media.width >= 720 -%}{{ card_product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
-              {%- if card_product.featured_media.width >= 940 -%}{{ card_product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
-              {%- if card_product.featured_media.width >= 1066 -%}{{ card_product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
-              {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
-            "
             src="{{ card_product.featured_media | image_url: width: 533 }}"
             sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
             alt="{{ card_product.featured_media.alt | escape }}"
-            class="row-start-1 col-start-1 group-hover:opacity-0 transition-opacity duration-300 ease-in-outgst"
+            class="featured-image row-start-1 col-start-1 group-hover:opacity-0 transition-opacity duration-300 ease-in-out"
             {% unless lazy_load == false %}
               loading="lazy"
             {% endunless %}
@@ -74,7 +68,7 @@
           >
 
           <img
-            class="row-start-1 col-start-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-outgst"
+            class="secondary-image row-start-1 col-start-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
             src="{{ card_product.selected_or_first_available_variant.metafields.custom.secondary_image | image_url: width: 533 }}"
             sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
             alt="{{ card_product.featured_media.alt | escape }}"
@@ -87,14 +81,19 @@
           >
         </div>
       </div>
+    </a>
 
-      <div>
-        {% render 'featured-collection-swatch', product: card_product %}
+    <div>
+      {% render 'featured-collection-swatch', product: card_product %}
+      <a
+        href="{{ card_product.url }}"
+        aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+      >
         <h3 class="text-sm">{{ card_product.metafields.custom.brand }}</h3>
         <h3 class="text-base font-bold text-navy">{{ card_product.title }}</h3>
 
         {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
-      </div>
+      </a>
     </div>
-  </a>
+  </div>
 {%- endif -%}

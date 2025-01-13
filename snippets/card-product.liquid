@@ -35,8 +35,8 @@
     href="{{ card_product.url }}"
     aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
   >
-    <div class="tw-wrapper group">
-      <div class="relative rounded-[10px] border border-grey">
+    <div class="group">
+      <div class="relative rounded-[10px] border border-grey mb-4">
         {%- if card_product.available == false -%}
           <span
             class="absolute top-5 left-5 rounded-3xl border border-sale-orange text-sale-orange py-1.5 px-3 font-medium text-base z-20"
@@ -65,7 +65,7 @@
             src="{{ card_product.featured_media | image_url: width: 533 }}"
             sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
             alt="{{ card_product.featured_media.alt | escape }}"
-            class="row-start-1 col-start-1 group-hover:opacity-0 transition-opacity duration-300 ease-in-out"
+            class="row-start-1 col-start-1 group-hover:opacity-0 transition-opacity duration-300 ease-in-outgst"
             {% unless lazy_load == false %}
               loading="lazy"
             {% endunless %}
@@ -74,7 +74,7 @@
           >
 
           <img
-            class="row-start-1 col-start-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
+            class="row-start-1 col-start-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-outgst"
             src="{{ card_product.selected_or_first_available_variant.metafields.custom.secondary_image | image_url: width: 533 }}"
             sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
             alt="{{ card_product.featured_media.alt | escape }}"
@@ -89,8 +89,8 @@
       </div>
 
       <div>
-        <h3 class="text-sm ">{{ card_product.metafields.custom.brand }}</h3>
-        <h3 class="text-base font-medium">{{ card_product.title }}</h3>
+        <h3 class="text-sm">{{ card_product.metafields.custom.brand }}</h3>
+        <h3 class="text-base font-bold text-navy">{{ card_product.title }}</h3>
 
         {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
       </div>
